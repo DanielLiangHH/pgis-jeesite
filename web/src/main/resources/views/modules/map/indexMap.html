@@ -1,0 +1,30 @@
+<% layout('/layouts/default.html', {title: '基础地图', libs: ['validate'],
+bodyClass: ''}){ %>
+<link href="${ctxStatic}/openlayer5/ol.css" rel="stylesheet" type="text/css" />
+<div class="main-content">
+
+
+	<div class="box box-main">
+		<div id="map" style="width: 100%; border: 1px solid #ccc;"></div>
+	</div>
+</div>
+<% } %>
+<!-- 外部js或者内嵌js -->
+<script type="text/javascript">
+	var mapServerUrl = '${@Global.getConfig("map.server.url")}';
+</script>
+<script type="text/javascript" src="${ctxStatic}/openlayer5/ol.js" charset="utf-8"></script>
+<script type="text/javascript" src="${ctxStatic}/map/mapClient.v1_0_0.js" charset="utf-8"></script>
+<script type="text/javascript" src="${ctxStatic}/map/initMap.js" charset="utf-8"></script>
+<script type="text/javascript">
+	$(window).resize(
+		function () {
+			var parentFrame = parent.document
+				.getElementsByTagName("IFRAME"),
+				h = $(parentFrame)
+				.height();
+			$('#map').css({
+				height: (h - 4) + "px"
+			});
+		}).resize();
+</script>
